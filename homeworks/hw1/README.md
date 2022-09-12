@@ -13,4 +13,4 @@ Throughout the process, I used commands such as cd to go to different levels in 
 
 ## Staging and Commiting Folders
 Finally, I used git add to stage all my folders and then git commit to commit them. Then I used git merge to add them to my master, and finally git push to push them onto GitHub.
-> After class where you explained your expectations, I understood that I was not supposed to merge my work and instead submit a pull request. I will submit a pull request for my new updates.
+> After class where you explained your expectations, I understood that I was not supposed to merge my work and submit a pull request instead. I will submit a pull request for my new updates.
