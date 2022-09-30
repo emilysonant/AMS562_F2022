@@ -7,8 +7,14 @@ int main() {
     std::cin >> title >> fname >> lname;
 
     //asks for dob
-    std::cout << "Please enter your date of birth mm/dd/yyyy";
+    std::cout << "Please enter your date of birth (mm/dd/yyyy)";
     std::string dob;
     std::cin >> dob;
+
+    //asks for bio
+    std::string bio;
+    std::cout << "Please enter a bio about yourself \n";
+    std::getline(std::cin, bio);
+
     
 }
