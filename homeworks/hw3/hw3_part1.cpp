@@ -6,13 +6,10 @@ int main(int argc, char *argv[]){
 //defines x
 float x = M_PI/4.0f;
 
+for (int i=1; i < 6; i++){
 //defines h
-std::string h_str = argv[1];
+std::string h_str = argv[i];
 float h = std::stof(h_str);
-
-//returns x and h
-std::cout << x << std::endl;
-std::cout << h << std::endl;
 
 //part 1 - finite difference method
 //approximation of y' = [f(x+h)-f(x)]/h for y = sin(x)
@@ -25,11 +22,6 @@ float y_prime_fd = (y_new - y)/h; //approximation for y' using the finite differ
 
 float percent_error_fd = fabs(((y_prime_fd - y_prime)/y_prime)*100); //percent error between approximation and actual value for finite difference method
 
-//returns y' fd approximation, y' actual, and percent error
-std::cout << y_prime << std::endl;
-std::cout << y_prime_fd << std::endl;
-std::cout << percent_error_fd << std::endl;
-
 //part 1 - center-difference method
 //approximation of y' = [f(x+h)-f(x-h)]/2h for y = sin(x)
 
@@ -39,9 +31,10 @@ float y_prime_cd = (y_new - y_old)/(2*h); //approximation for y' using the cente
 
 float percent_error_cd = fabs(((y_prime_cd - y_prime)/y_prime)*100); //percent error between approximation and actual value for center difference method
 
-//returns y' cd approximation and percent error
-std::cout << y_prime_cd << std::endl;
-std::cout << percent_error_cd << std::endl;
+//prints results
+std::cout << "y' =\t" << y_prime << std::endl;
+std::cout << "for h =\t" << h << "\nthe finite difference method approximation is\t" << y_prime_fd << "\nwith a percent error of\t" << percent_error_fd << "\nthe center difference approximation is\t" << y_prime_cd << "\nwith a percent error of\t" << percent_error_cd << "\n" << std::endl;
+}
 
 return 0;
 }
