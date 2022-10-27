@@ -32,3 +32,5 @@ the finite difference method approximation is   0
 with a percent error of 100
 the center difference approximation is  0
 with a percent error of 100
+
+For h = 1e-16 the percent error is 100 and the approximations are 0. The reason for this is because h is so small that it is negligible, so the numerators for the finite difference method and the center difference method approach zero.
