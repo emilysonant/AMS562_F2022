@@ -1,0 +1,7 @@
+# Homework 2 Explanation
+## Creating New Folders and Files
+For the first step, I created a new folder inside my homeworks folder named [hw2](https://github.com/emilysonant/AMS562_F2022/tree/main/homeworks/hw2) using the function mkdir. I then made two files inside the folder with the touch command, one named [README.md](https://github.com/emilysonant/AMS562_F2022/tree/main/homeworks/hw2/README.md) to explain my code in a text file, and one named [hw2_io.cpp](https://github.com/emilysonant/AMS562_F2022/tree/main/homeworks/hw2/hw2_io.cpp) to write my code in.
+## Writing the Code
+In my code, I have four main sections. The first three sections ask the user for their personal information (title/first name/last name, date of birth, and bio). These three sections output instructions for the user using std::cout, define the strings using std::string, and then input the string that the user enters as the predefined string using std::cin. In the bio section, the string is input into std::getline which allows multiple words with spaces in between to be defined as one variable. Finally, the last section prints out the information using std::cout for the user to see. This section uses \n and std::endl to create a nice format with separated lines.
+## Saving the Code
+For each of the four sections as well as the README.md file, a commit was made into a new branch named hw_2. The hw_2 branch will be pushed into GitHub and then a merge request will be made.
