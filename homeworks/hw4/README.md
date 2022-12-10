@@ -21,3 +21,10 @@ The two free functions are used to define the operators + and - to add and subtr
 
 # The main.cpp file
 The main.cpp file is used to test all of the functions in array.cpp. There are tests written for each function, except for a few that are tested in other functions such as the function for printing. The tests are all printed so that the values can be checked.
+
+## How to test my code
+You can use the main.cpp file to test my code and make sure that all of the functions I wrote give the correct values. In the terminal, use
+```bash
+g++ array.cpp main.cpp && ./a.out
+```
+to print out the complete test of the code.
