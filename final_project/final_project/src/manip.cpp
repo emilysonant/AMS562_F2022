@@ -1,6 +1,7 @@
 #include "manip.hpp"
-#include <cmath>
+
 #include <algorithm>
+#include <cmath>
 
 // you will need cmath and algorithm headers.
 
@@ -13,6 +14,11 @@ void compute_n2e_adj(const unsigned n, const Triangles &conn,
   // reserve for each of them with a reasonable upper bound
 
   // your code
+  /* for(i = 0; i < 146; i++) {
+    for(j = 0; j <= 2; j++) {
+      
+    }
+  } */
 }
 
 void compute_avg_normals(const SphCo &points, const Triangles &conn,
@@ -22,26 +28,27 @@ void compute_avg_normals(const SphCo &points, const Triangles &conn,
   nrms.resize(points.npoints());
 
   // your code
-  for(int i = 0; i <= 146; i++){
-    //declaring the current triangle that is being evaluated in conn
-    double curr_conn = conn[i]; 
+  for (int i = 0; i <= 146; i++) {
+    
+    // defining the coordinates of each connection
+    std::vector<std::array<double, 3>> pts = points.to_vector();
 
-    //defining the three connections of the triangle
-    conn1 = curr_conn[0];
-    conn2 = curr_conn[1];
-    conn3 = curr_conn[2];
+    std::array<double, 3> pts1 = pts[i];
+    std::array<double, 3> pts2 = pts[i+1];
+    std::array<double, 3> pts3 = pts[i+2];
 
-    //defining the coordinates of each connection
-    pts1 = points[conn1];
-    pts2 = points[conn2];
-    pts3 = points[conn3];
+    // finding the vector between the points
+    std::vector<double> vec12 = {(pts2[0] - pts1[0]), (pts2[1] - pts1[1]), (pts2[2] - pts1[2])};
+    std::vector<double> vec13 = {(pts3[0] - pts1[0]), (pts3[1] - pts1[1]), (pts3[2] - pts1[2])};
 
-    //finding the vectors between the points
-    dist12 = pow((pts2[0] - pts1[0]), 2) + pow((pts2[1] - pts1[1]), 2) + pow((pts2[2] - pts1[2]), 2);
-    dist12 = sqrt(dist12);
+    // cross product of vector 12 and 13
+    std::vector<double> crossprod = {(vec12[1]*vec13[2] - vec12[2]*vec13[1]), {vec12[2]*vec13[0] - vec12[0]*vec13[2]}, (vec12[0]*vec13[1] - vec12[1]*vec13[0])};
+  
+    // magnitude of the cross product
+    double mag = sqrt((pow(crossprod[0], 2)) + pow(crossprod[1], 2) + pow(crossprod[2], 2));
 
-    dist13 = pow((pts3[0] - pts1[0]), 2) + pow((pts3[1] - pts1[1]), 2) + pow((pts3[2] - pts1[2]), 2);
-    dist13 = sqrt(dist13);
+    // normalize vectors
+    std::vector<double> norm = {(crossprod[0]/mag), (crossprod[1]/mag), (crossprod[2]/mag)};
   }
 
   // hint don't forget normalizing the normals
