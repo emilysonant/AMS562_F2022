@@ -14,11 +14,21 @@ void compute_n2e_adj(const unsigned n, const Triangles &conn,
   // reserve for each of them with a reasonable upper bound
 
   // your code
-  /* for(i = 0; i < 146; i++) {
-    for(j = 0; j <= 2; j++) {
-      
+  for(int i = 0; i < 146; i++) {
+    std::array<int, 3> triangle = conn[i];
+    for(int j = 0; j <= 2; j++) {
+      int node = triangle[j];
+      for(int k = 0; k < 146; k++) {
+        std::array<int, 3> triangle2 = conn[k];
+        for(int l = 0; l <=2; l++) {
+          int node2 = triangle2[l];
+          if(node2 == node) {
+            adj[i].push_back(node2);
+          }
+        }
+      }
     }
-  } */
+  }
 }
 
 void compute_avg_normals(const SphCo &points, const Triangles &conn,
@@ -50,8 +60,16 @@ void compute_avg_normals(const SphCo &points, const Triangles &conn,
     // normalize vectors
     std::vector<double> norm = {(crossprod[0]/mag), (crossprod[1]/mag), (crossprod[2]/mag)};
   }
+/*
+  for(int v = 0; v < sizeof(n2e_adj); v++) {
+    int k = n2e_adj[v]; 
+    for(int w = 0; w < k; w++) {
+      int z += k[w];
+    }
+    int z = z/k;
+  }
 
-  // hint don't forget normalizing the normals
+  // hint don't forget normalizing the normals */
 }
 
 void compute_errors(const SphCo &exact, const SphCo &num,
