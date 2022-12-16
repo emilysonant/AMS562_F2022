@@ -59,18 +59,24 @@ void compute_avg_normals(const SphCo &points, const Triangles &conn,
     norm = {(norm[0]/normmag), (norm[1]/normmag), (norm[2]/normmag)};
   }
 
-  //sum over adjacent normals and average them
+  //sum of all adjacent normals
   int z = 0;
+  std::vector<int> vect_z;
   for (unsigned v = 0; v < sizeof(n2e_adj); v++) {
     std::vector<int> adj_nodes = n2e_adj[v];
     int k = sizeof(adj_nodes);
     for (unsigned w = 0; w < sizeof(k); w++) {
       z += adj_nodes[w];
     }
+    //average of adjacent normals
     z = z/k;
-
-    //normalize vector
+    vect_z[v] = z;
   }
+
+  /*
+  // normalize the vector
+  nrms = {}
+*/
 
   // hint don't forget normalizing the normals
 }
@@ -81,13 +87,18 @@ void compute_errors(const SphCo &exact, const SphCo &num,
   acos_theta.resize(num.npoints());
 
   // your code
-  /*
+  
   //normalize num
-  num_mag = sqrt((pow(num[0], 2) + (pow(num[1], 2) + (pow(num[2], 2)))));
-  num = {(num[0] / num_mag), (num[1] / num_mag), (num[2] / num_mag)};
-  exact_mag = sqrt((pow(exact[0], 2) + (pow(exact[1], 2) + (pow(exact[2], 2)))));
-  acos_theta = acos((num*exact)/(num_mag*exact_mag)); 
-  */
+  for(unsigned i = 0; i < num.npoints(); i++) {
+    std::array<double, 3> points_num = num[i];
+    std::array<double, 3> points_exact = exact[i];
+
+    double num_mag = sqrt(points_num[0]*points_num[0] + points_num[1]*points_num[1] + points_num[2]*points_num[2]);
+    std::vector<double> num_norm = {(points_num[0] / num_mag), (points_num[1] / num_mag), (points_num[2] / num_mag)};
+    double exact_mag = sqrt((pow(points_exact[0], 2) + (pow(points_exact[1], 2) + (pow(points_exact[2], 2)))));
+  
+    acos_theta[i] = acos((points_num[0]*points_exact[0] + points_num[1]*points_exact[1] + points_num[2]*points_exact[2])/(num_mag*exact_mag)); 
+  }  
 } 
 
 }  // namespace ams562_final
