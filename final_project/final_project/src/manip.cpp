@@ -30,7 +30,7 @@ void compute_avg_normals(const SphCo &points, const Triangles &conn,
   nrms.resize(points.npoints());
 
   // your code
-  for (int i = 0; i <= 146; i++) {
+  for (int i = 0; i <= conn.ntris(); i++) {
     // defining the coordinates of each connection
     std::vector<std::array<double, 3>> pts = points.to_vector();
 
@@ -68,7 +68,7 @@ void compute_avg_normals(const SphCo &points, const Triangles &conn,
       z += adj_nodes[w];
     }
     z = z/k;
-    
+
     //normalize vector
   }
 
@@ -81,6 +81,13 @@ void compute_errors(const SphCo &exact, const SphCo &num,
   acos_theta.resize(num.npoints());
 
   // your code
-}
+  /*
+  //normalize num
+  num_mag = sqrt((pow(num[0], 2) + (pow(num[1], 2) + (pow(num[2], 2)))));
+  num = {(num[0] / num_mag), (num[1] / num_mag), (num[2] / num_mag)};
+  exact_mag = sqrt((pow(exact[0], 2) + (pow(exact[1], 2) + (pow(exact[2], 2)))));
+  acos_theta = acos((num*exact)/(num_mag*exact_mag)); 
+  */
+} 
 
 }  // namespace ams562_final
