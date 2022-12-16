@@ -23,9 +23,8 @@ void compute_n2e_adj(const unsigned n, const Triangles &conn,
   }
 }
 
-void compute_avg_normals(const SphCo &points, const Triangles &conn,
-                         const std::vector<std::vector<int>> &n2e_adj,
-                         SphCo &nrms) {
+void compute_avg_normals(const SphCo &points, const Triangles &conn, const std::vector<std::vector<int>> &n2e_adj, SphCo &nrms) {
+ 
   // resize the nrms
   nrms.resize(points.npoints());
 
@@ -51,30 +50,26 @@ void compute_avg_normals(const SphCo &points, const Triangles &conn,
     std::vector<double> vec13 = {(pts3[0] - pts1[0]), (pts3[1] - pts1[1]), (pts3[2] - pts1[2])};
 
     // cross product of vector 12 and 13
-    std::vector<double> crossprod = {
-        (vec12[1] * vec13[2] - vec12[2] * vec13[1]), {vec12[2] * vec13[0] - vec12[0] * vec13[2]}, (vec12[0] * vec13[1] - vec12[1] * vec13[0])};
+    std::vector<double> crossprod = {(vec12[1] * vec13[2] - vec12[2] * vec13[1]), {vec12[2] * vec13[0] - vec12[0] * vec13[2]}, (vec12[0] * vec13[1] - vec12[1] * vec13[0])};
 
     // magnitude of the cross product
     double mag = sqrt((pow(crossprod[0], 2)) + pow(crossprod[1], 2) +pow(crossprod[2], 2));
 
     // normalize vectors
     std::vector<double> norm = {(crossprod[0] / mag), (crossprod[1] / mag), (crossprod[2] / mag)};
-   /* double normmag = sqrt((pow(norm[0], 2) + (pow(norm[1], 2) + (pow(norm[2], 2)))));
-    norm = {(norm[0]/normmag), (norm[1]/normmag), (norm[2]/normmag)}; */
 
     // store facial normal
     facialNormals[i] = norm;
   }
 
-  //sum of all adjacent normals
-  /*int z = 0;
-  double vectz_mag = 0;*/
+  // sum of all adjacent normals
   for (unsigned v = 0; v < n2e_adj.size(); v++) {
     std::vector<int> adj_nodes = n2e_adj[v];
     int k = adj_nodes.size();
-    std::vector<int> vect_z{0, 0, 0};
+    std::vector<double> vect_z{0, 0, 0};
     for (unsigned w = 0; w < k; w++) {
-      //add vector facialNormals[adj_nodes[w]] to z
+      
+      // add vector facialNormals[adj_nodes[w]] to z
       for(unsigned y = 0; y < 3; y++) {
         vect_z[y] += facialNormals[adj_nodes[w]][y];
       }
@@ -97,8 +92,8 @@ void compute_avg_normals(const SphCo &points, const Triangles &conn,
   // hint don't forget normalizing the normals
 }
 
-void compute_errors(const SphCo &exact, const SphCo &num,
-                    std::vector<double> &acos_theta) {
+void compute_errors(const SphCo &exact, const SphCo &num, std::vector<double> &acos_theta) {
+
   // resize the error array
   acos_theta.resize(num.npoints());
 
